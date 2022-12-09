@@ -1,16 +1,15 @@
-from flask import Flask, jsonify
-from flask_sqlalchemy import SQLAlchemy
+from api.authentication.views import *
 
-app = Flask(__name__)
+app.register_blueprint(user_api)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+psycopg2://postgres:password@localhost:5432/todolist"
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy(app)
 
 @app.route('/home',methods=['GET'])
 def home():
-    return jsonify(page="home")
+    try:
+        return success('success','home page')
+    except Exception as err:
+        print(traceback.print_exc())
+        return failure(str(err))
 
 if __name__ == '__main__':
     app.run(debug=True)
