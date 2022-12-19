@@ -1,6 +1,9 @@
 from api.authentication.views import *
+from api.todolist.views import *
+
 
 app.register_blueprint(user_api)
+app.register_blueprint(todolist_api)
 
 
 @app.route('/home',methods=['GET'])
